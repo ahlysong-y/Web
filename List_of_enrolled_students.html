@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>List Of enrolled Student</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+    body.offcanvas-open {
+      overflow: hidden;
+    }
+    .badge-primary {
+      background: linear-gradient(50deg, #7226ff 0%, #160078, #010030 100%);
+    }
+    .offcanvas-end {
+      position: fixed !important;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 250px;
+      z-index: 1045;
+      background-color: #fff;
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease;
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    .offcanvas-end.show {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+    .badge-danger {
+      background: linear-gradient(45deg, #0d0e20 0%, #2d1c7f 100%);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark badge-primary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">VIMEANTECH UNIVERSITY</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Offcanvas Menu -->
+  <div class="offcanvas offcanvas-end fade" id="offcanvasNavbar">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <!-- Profile Preview -->
+    <div class="text-center border-bottom pb-3">
+      <a href="profile.html" class="text-decoration-none text-dark">
+     <img id="profilePic" src="https://via.placeholder.com/80" width="80" height="80" class="rounded-circle">
+<h5 id="profileNameDisplay">Unknown</h5>
+        <small class="text-muted">View Profile</small>
+      </a>
+    </div>
+
+    <div class="offcanvas-body">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <li class="nav-item"><a class="nav-link active" href="VTU_University.html">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="List_of_all_Student.html">List of all students</a></li>
+            <li><a class="dropdown-item" href="List_of_enrolled_students.html">List of enrolled students</a></li>
+            <li><a class="dropdown-item" href="List_of_students_who_dropped_out.html">List of students who dropped out</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Subject</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="Information_technology.html">Information technology</a></li>
+            <li><a class="dropdown-item" href="Business_Administration.html">Business Administration</a></li>
+            <li><a class="dropdown-item" href="Medicine.html">Medicine</a></li>
+            <li><a class="dropdown-item" href="Natural_Sciences.html">Natural Sciences</a></li>
+            <li><a class="dropdown-item" href="Law.html">Law</a></li>
+            <li><a class="dropdown-item" href="Architecture_&_Civil_Engineering.html">Architecture & Civil Engineering</a></li>
+            <li><a class="dropdown-item" href="Education.html">Education</a></li>
+            <li><a class="dropdown-item" href="Aris_Humanities.html">Aris Humanities</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex mt-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" />
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+            <div class="container mt-5">
+        <div class="text-center mt-5">
+          <button id="exitBtn" class="btn btn-danger">Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <div class="container-fluid mt-5 pt-4 mx-2">
+    <h4>List Of Enrolled Student</h4>
+    <hr />
+    <div class="row">
+      <div class="col-md-10">
+        <form class="d-flex">
+          <input class="form-control me-2" type="text" placeholder="Search">
+          <button class="btn btn-primary" type="button">Search</button>
+        </form>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addmodal">Add New</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mt-4">
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th class="bg-dark text-white">ID</th>
+          <th class="bg-dark text-white">Profile</th>
+          <th class="bg-dark text-white">Name</th>
+          <th class="bg-dark text-white">Sex</th>
+          <th class="bg-dark text-white">Birth Of Date</th>
+          <th class="bg-dark text-white">Phone</th>
+          <th class="bg-dark text-white">Subject</th>
+          <th class="bg-dark text-white">Action</th>
+        </tr>
+      </thead>
+      <tbody id="studentTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Add Student Modal -->
+  <div class="modal" id="addmodal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header badge-danger">
+          <h4 class="modal-title text-white">Add New Student</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter Your Name">
+            </div>
+            <div class="col-md">
+              <label class="form-label">Sex</label>
+              <select class="form-select" id="select">
+                <option selected disabled>Sex</option>
+                <option>Female</option>
+                <option>Male</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md">
+              <label class="form-label">Birth Of Date</label>
+              <input type="text" placeholder="Enter Birth of Date" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" class="form-control">
+            </div>
+            <div class="col-md">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control" id="phone" placeholder="Enter Your Phone">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md">
+              <label class="form-label">Subject </label>
+              <select name="select" class="form-select">
+                <option selected disabled>Select Subject</option>
+                <option>Information technology</option>
+                <option>Business Administration</option>
+                <option>Medicine</option>
+                <option>Natural Sciences</option>
+                <option>Architecture & Civil Engineering</option>
+                <option>Education</option>
+                <option>Aris Humanities</option>
+                <option>Law</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md">
+              <label class="form-label">Profile</label>
+              <input type="file" class="form-control" id="profile">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-pill" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success btn-pill">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const nameInput = document.getElementById('name');
+    const sexSelect = document.querySelector('#select');
+    const birthInput = document.querySelector('input[placeholder="Enter Birth of Date"]');
+    const phoneInput = document.getElementById('phone');
+    const subjectSelect = document.querySelector('select[name="select"]');
+    const profileInput = document.getElementById('profile');
+    const saveBtn = document.querySelector('.modal-footer .btn-success');
+    const tableBody = document.getElementById('studentTableBody');
+    const searchInput = document.querySelector('.container-fluid input[type="text"][placeholder="Search"]');
+    let editIndex = -1;
+
+    let students = JSON.parse(localStorage.getItem('students')) || [];
+
+    function renderTable(data = students) {
+      tableBody.innerHTML = '';
+      data.forEach((student, index) => {
+        const row = `
+          <tr>
+            <td>${index + 1}</td>
+            <td><img src="${student.profile}" width="40" height="40" class="rounded-circle" /></td>
+            <td>${student.name}</td>
+            <td>${student.sex}</td>
+            <td>${student.birth}</td>
+            <td>${student.phone}</td>
+            <td>${student.subject}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" onclick="editStudent(${index})">Edit</button>
+              <button class="btn btn-sm btn-danger" onclick="confirmDelete(${index})">Delete</button>
+            </td>
+          </tr>`;
+        tableBody.innerHTML += row;
+      });
+    }
+
+    window.confirmDelete = (index) => {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This student will be permanently deleted!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          students.splice(index, 1);
+          localStorage.setItem('students', JSON.stringify(students));
+          renderTable();
+
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Student has been deleted.',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+        }
+      });
+    };
+
+    window.editStudent = (index) => {
+      const student = students[index];
+      editIndex = index;
+      nameInput.value = student.name;
+      sexSelect.value = student.sex;
+      birthInput.type = 'date';
+      birthInput.value = student.birth;
+      phoneInput.value = student.phone;
+      subjectSelect.value = student.subject;
+
+      const modal = new bootstrap.Modal(document.getElementById('addmodal'));
+      modal.show();
+    };
+
+    saveBtn.addEventListener('click', () => {
+      const file = profileInput.files[0];
+      const updateData = (imgBase64 = null) => {
+        const student = {
+          name: nameInput.value.trim(),
+          sex: sexSelect.value,
+          birth: birthInput.value,
+          phone: phoneInput.value.trim(),
+          subject: subjectSelect.value,
+          profile: imgBase64 || (editIndex > -1 ? students[editIndex].profile : '')
+        };
+
+        if (!student.name || !student.sex || !student.birth || !student.phone || !student.subject || (!student.profile && editIndex === -1)) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please fill in all fields!'
+          });
+          return;
+        }
+
+        if (editIndex > -1) {
+          students[editIndex] = student;
+          editIndex = -1;
+        } else {
+          students.push(student);
+        }
+
+        localStorage.setItem('students', JSON.stringify(students));
+        renderTable();
+
+        // Clear form
+        nameInput.value = '';
+        sexSelect.selectedIndex = 0;
+        birthInput.type = 'text';
+        birthInput.value = '';
+        phoneInput.value = '';
+        subjectSelect.selectedIndex = 0;
+        profileInput.value = '';
+
+        bootstrap.Modal.getInstance(document.getElementById('addmodal')).hide();
+
+        Swal.fire({
+          icon: 'success',
+          title: editIndex > -1 ? 'Updated successfully!' : 'Student added successfully!',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      };
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          updateData(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        updateData();
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const value = searchInput.value.toLowerCase();
+      const filtered = students.filter((s, i) =>
+        s.name.toLowerCase().includes(value) || (i + 1).toString().includes(value)
+      );
+      renderTable(filtered);
+    });
+
+    // Offcanvas profile preview from localStorage
+    const offcanvas = document.getElementById('offcanvasNavbar');
+    offcanvas.addEventListener('show.bs.offcanvas', () => {
+      document.body.classList.add('offcanvas-open');
+      const name = localStorage.getItem('profileName') || 'AH LY SONG';
+      const img = localStorage.getItem('profileImg') || 'https://via.placeholder.com/80';
+      document.getElementById('profileNameDisplay').textContent = name;
+      document.getElementById('profilePic').src = img;
+    });
+
+    offcanvas.addEventListener('hidden.bs.offcanvas', () => {
+      document.body.classList.remove('offcanvas-open');
+    });
+
+    renderTable();
+  });
+  const exitBtn = document.getElementById('exitBtn');
+exitBtn.addEventListener('click', () => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You will be redirected to the login page.',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, Exit',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // ✅ Go to index.html
+      window.location.href = 'index.html';
+    }
+  });
+});
+</script>
+
+<script src="navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+.badge-danger {
+  background: linear-gradient(45deg, #ff6b6b 0%, #ffa726 100%);
+}
+
+.badge-success {
+  background: linear-gradient(50deg, #d0d34d, #157954 0%, #21263a 100%);
+}

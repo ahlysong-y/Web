@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile - VTU University</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    #previewImg {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    .badge-primary {
+      background: linear-gradient(50deg, #7226ff 0%, #160078, #010030 100%);
+    }
+    .offcanvas-end {
+      position: fixed !important;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 250px;
+      z-index: 1045;
+      background-color: #fff;
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease;
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    .offcanvas-end.show {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark badge-primary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">VIMEANTECH UNIVERSITY</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Offcanvas Menu -->
+  <div class="offcanvas offcanvas-end fade" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="text-center border-bottom pb-3">
+      <a href="profile.html" class="text-decoration-none text-dark">
+        <img id="profilePic" src="https://via.placeholder.com/80" alt="Profile" class="rounded-circle shadow mb-2" width="80" height="80" />
+        <h6 class="mb-0" id="profileNameDisplay">AH LY SONG</h6>
+        <small class="text-muted">View Profile</small>
+      </a>
+    </div>
+      
+    <div class="offcanvas-body">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <li class="nav-item"><a class="nav-link active" href="VTU_University.html#Home">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="List_of_all_Student.html">List of all students</a></li>
+            <li><a class="dropdown-item" href="List_of_enrolled_students.html">List of enrolled students</a></li>
+            <li><a class="dropdown-item" href="List_of_students_who_dropped_out.html">List of students who dropped out</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Subject</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="Information_technology.html">Information technology</a></li>
+            <li><a class="dropdown-item" href="Business_Administration.html">Business Administration</a></li>
+            <li><a class="dropdown-item" href="Medicine.html">Medicine</a></li>
+            <li><a class="dropdown-item" href="Natural_Sciences.html">Natural Sciences</a></li>
+            <li><a class="dropdown-item" href="Law.html">Law</a></li>
+            <li><a class="dropdown-item" href="Architecture_&_Civil_Engineering.html">Architecture & Civil Engineering</a></li>
+            <li><a class="dropdown-item" href="Education.html">Education</a></li>
+            <li><a class="dropdown-item" href="Aris_Humanities.html">Arts & Humanities</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <form class="d-flex mt-3" role="search" onsubmit="event.preventDefault();">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+
+      <!-- Exit Button (type="button" to avoid form submit) -->
+      <div class="container mt-5">
+        <div class="text-center mt-5">
+          <button id="exitBtn" type="button" class="btn btn-danger">Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Profile Form -->
+  <div class="container py-5 mt-5">
+    <h2 class="mb-4 text-center">Update Profile</h2>
+
+    <div class="text-center mb-4">
+      <img id="previewImg" src="https://via.placeholder.com/80" alt="Profile Preview" />
+      <h5 id="previewName" class="mt-2">Your Name</h5>
+    </div>
+
+    <form id="profileForm" class="bg-white p-4 rounded shadow-sm" novalidate>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label" for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" required />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="lastName">Last Name</label>
+          <input type="text" class="form-control" id="lastName" required />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label" for="sex">Sex</label>
+          <select class="form-select" id="sex" required>
+            <option value="" disabled>Select sex</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="age">Age</label>
+          <input type="number" class="form-control" id="age" min="1" required />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="dob">Date of Birth</label>
+        <input type="date" class="form-control" id="dob" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="birthPlace">Place of Birth</label>
+        <input type="text" class="form-control" id="birthPlace" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="currentAddress">Current Address</label>
+        <input type="text" class="form-control" id="currentAddress" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="university">University Name</label>
+        <input type="text" class="form-control" id="university" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" class="form-control" id="email" required />
+      </div>
+
+      <!-- Password with toggle -->
+      <div class="mb-3 position-relative">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" class="form-control" id="password" required />
+        <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password', this)"></i>
+      </div>
+      <div class="mb-3 position-relative">
+        <label class="form-label" for="confirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" required />
+        <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('confirmPassword', this)"></i>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="profileImgFile">Upload Profile Image</label>
+        <input type="file" class="form-control" id="profileImgFile" accept="image/*" />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="VTU_University.html" class="btn btn-secondary ms-2">Back</a>
+    </form>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="saveSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title text-success">Success</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0">Your profile has been saved successfully!</p>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Load saved data from localStorage
+    window.addEventListener('DOMContentLoaded', () => {
+      const fields = ['firstName', 'lastName', 'sex', 'age', 'dob', 'birthPlace', 'currentAddress', 'university', 'email', 'password'];
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = localStorage.getItem(id) || '';
+      });
+      document.getElementById('confirmPassword').value = localStorage.getItem('password') || '';
+      const imgSrc = localStorage.getItem('profileImg') || 'https://via.placeholder.com/80';
+      document.getElementById('previewImg').src = imgSrc;
+      document.getElementById('profilePic').src = imgSrc;
+
+      // Set names on preview and offcanvas
+      const first = localStorage.getItem('firstName') || '';
+      const last = localStorage.getItem('lastName') || '';
+      const fullName = `${first} ${last}`.trim() || 'Your Name';
+      document.getElementById('previewName').textContent = fullName;
+      document.getElementById('profileNameDisplay').textContent = fullName;
+    });
+
+    // Preview name update on input
+    ['firstName', 'lastName'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        const first = document.getElementById('firstName').value.trim();
+        const last = document.getElementById('lastName').value.trim();
+        const fullName = `${first} ${last}`.trim() || 'Your Name';
+        document.getElementById('previewName').textContent = fullName;
+      });
+    });
+
+    // Preview image on file select
+    document.getElementById('profileImgFile').addEventListener('change', function () {
+      const file = this.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          document.getElementById('previewImg').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Toggle password visibility
+    function togglePassword(id, icon) {
+      const input = document.getElementById(id);
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+      }
+    }
+
+    // Form submit save data to localStorage
+    document.getElementById('profileForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      const pwd = document.getElementById('password').value;
+      const confirmPwd = document.getElementById('confirmPassword').value;
+      if (pwd !== confirmPwd) {
+        alert('Passwords do not match!');
+        return;
+      }
+
+      const saveData = (imgData) => {
+        const fields = ['firstName', 'lastName', 'sex', 'age', 'dob', 'birthPlace', 'currentAddress', 'university', 'email', 'password'];
+        fields.forEach(id => {
+          const val = document.getElementById(id).value.trim();
+          localStorage.setItem(id, val);
+        });
+        localStorage.setItem('profileImg', imgData);
+
+        // Show bootstrap modal success
+        const modal = new bootstrap.Modal(document.getElementById('saveSuccessModal'));
+        modal.show();
+      };
+
+      const fileInput = document.getElementById('profileImgFile');
+      const file = fileInput.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = e => saveData(e.target.result);
+        reader.readAsDataURL(file);
+      } else {
+        saveData(document.getElementById('previewImg').src);
+      }
+    });
+
+    // Exit button SweetAlert2 confirmation
+    document.getElementById('exitBtn').addEventListener('click', () => {
+      Swal.fire({
+        title: 'Are you sure you want to exit?',
+        text: "You will be redirected to the homepage.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, Exit',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = 'index.html';
+        }
+      });
+    });
+  </script>
+ 
+</body>
+</html>

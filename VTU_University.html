@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VTU University</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+    body.offcanvas-open {
+      overflow: hidden;
+    }
+    .badge-primary {
+      background: linear-gradient(50deg, #7226ff 0%, #160078, #010030 100%);
+    }
+    .offcanvas-end {
+      position: fixed !important;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 250px;
+      z-index: 1045;
+      background-color: #fff;
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease;
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    .offcanvas-end.show {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+    .scrollable-table-wrapper {
+      max-height: 300px;
+      overflow-y: auto;
+      overflow-x: auto;
+    }
+    .scrollable-table table {
+      min-width: 500px;
+    }
+    .scrollable-table thead th {
+      position: sticky;
+      top: 0;
+      background-color: #343a40;
+      color: white;
+      z-index: 2;
+    }
+    @media (max-width: 768px) {
+      .scrollable-table table {
+        font-size: 14px;
+        min-width: 100%;
+      }
+      .scrollable-table-wrapper {
+        max-height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark badge-primary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">VIMEANTECH UNIVERSITY</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Offcanvas Sidebar -->
+  <div class="offcanvas offcanvas-end fade" id="offcanvasNavbar">
+    
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    
+     <div class="text-center border-bottom pb-3">
+      <a href="profile.html" class="text-decoration-none text-dark">
+       <img id="profilePic" src="https://via.placeholder.com/80" width="80" height="80" class="rounded-circle">
+        <h5 id="profileNameDisplay">Unknown</h5>
+        <small class="text-muted">View Profile</small>
+      </a>
+    </div>
+    
+  
+    
+    <div class="offcanvas-body">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <li class="nav-item"><a class="nav-link active" href="#Home">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="List_of_all_Student.html">List of all students</a></li>
+            <li><a class="dropdown-item" href="List_of_enrolled_students.html">List of enrolled students</a></li>
+            <li><a class="dropdown-item" href="List_of_students_who_dropped_out.html">List of students who dropped out</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Subject</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="Information_technology.html">Information technology</a></li>
+            <li><a class="dropdown-item" href="Business_Administration.html">Business Administration</a></li>
+            <li><a class="dropdown-item" href="Medicine.html">Medicine</a></li>
+            <li><a class="dropdown-item" href="Natural_Sciences.html">Natural Sciences</a></li>
+            <li><a class="dropdown-item" href="Law.html">Law</a></li>
+            <li><a class="dropdown-item" href="Architecture_&_Civil_Engineering.html">Architecture & Civil Engineering</a></li>
+            <li><a class="dropdown-item" href="Education.html">Education</a></li>
+            <li><a class="dropdown-item" href="Aris_Humanities.html">Aris Humanities</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex mt-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" />
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+      <div class="container mt-5">
+        <div class="text-center mt-5">
+          <button id="exitBtn" class="btn btn-danger">Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container-fluid mx-4 mt-5 pt-5">
+    <h3 id="Home">Student Data</h3>
+    <hr />
+    <div class="row">
+      <div class="col-md">
+        <div class="card shadow mt-2">
+          <div class="card-body">
+            <h5>Male Student</h5>
+            <p class="text-success">40%</p>
+            <div class="progress"><div class="progress-bar" style="width:40%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="card shadow mt-2">
+          <div class="card-body">
+            <h5>Female Student</h5>
+            <p class="text-success">60%</p>
+            <div class="progress"><div class="progress-bar bg-danger" style="width:60%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="card shadow mt-2">
+          <div class="card-body">
+            <h5>Total data Student</h5>
+            <p>Female & Male</p>
+            <div class="mt-3">
+              <div class="progress">
+                <div class="progress-bar bg-primary d-flex justify-content-center" style="width:40%">40%</div>
+                <div class="progress-bar bg-danger d-flex justify-content-center" style="width:60%">60%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table and Chart -->
+  <div class="container-fluid mt-3 py-4">
+    <div class="row">
+      <div class="col-md">
+        <h4 class="mx-3">Data science</h4>
+        <div class="scrollable-table-wrapper">
+          <div class="scrollable-table">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Average</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Information technology</td><td>25%</td></tr>
+                <tr><td>Business Administration</td><td>20%</td></tr>
+                <tr><td>Medicine</td><td>15%</td></tr>
+                <tr><td>Natural Sciences</td><td>10%</td></tr>
+                <tr><td>Law</td><td>8%</td></tr>
+                <tr><td>Architecture & Civil Engineering</td><td>7%</td></tr>
+                <tr><td>Education</td><td>5%</td></tr>
+                <tr><td>Aris & Humanities</td><td>5%</td></tr>
+                <tr><td>Others</td><td>5%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <h3 class="text-center mb-4">Annual student data table</h3>
+        <div class="container-fluid mt-5 shadow mb-2">
+          <canvas id="myChart" width="40" height="20"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exit Confirmation Modal -->
+  <div class="modal fade" id="exitConfirmModal" tabindex="-1" aria-labelledby="exitConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-dark text-white">
+          <h5 class="modal-title" id="exitConfirmModalLabel">Confirm Exit</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p>Are you sure you want to exit to the homepage?</p>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmExitBtn">Yes, Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="navbar.js"></script>
+  <!-- Bootstrap + Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- JavaScript Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const offcanvas = document.getElementById('offcanvasNavbar');
+
+      // Touch gesture support
+      let touchStartX = 0, touchEndX = 0;
+      offcanvas.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+      offcanvas.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].clientX;
+        if (touchStartX - touchEndX > 50) bootstrap.Offcanvas.getInstance(offcanvas)?.hide();
+      });
+      document.body.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+      document.body.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].clientX;
+        if (touchStartX > window.innerWidth - 40 && touchEndX - touchStartX > 50)
+          new bootstrap.Offcanvas(offcanvas).show();
+      });
+
+      // Update profile on open
+      function updateProfilePreview() {
+        const currentUserEmail = localStorage.getItem('currentUserEmail');
+        const users = JSON.parse(localStorage.getItem('signupDataArray')) || [];
+        const user = users.find(u => u.email.toLowerCase() === currentUserEmail?.toLowerCase());
+        if (user) {
+          document.getElementById('profileNameDisplay').textContent = user.firstName + ' ' + user.lastName;
+          document.getElementById('profilePic').src = user.profileImg || 'https://via.placeholder.com/80';
+        }
+      }
+
+      updateProfilePreview();
+      offcanvas.addEventListener('show.bs.offcanvas', updateProfilePreview);
+
+      // Exit logic
+      document.getElementById("exitBtn").addEventListener("click", () => {
+        const modal = new bootstrap.Modal(document.getElementById("exitConfirmModal"));
+        modal.show();
+      });
+      document.getElementById("confirmExitBtn").addEventListener("click", () => {
+        window.location.href = "index.html";
+      });
+
+      // Chart rendering
+      const ctx = document.getElementById('myChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['2022', '2023', '2024', '2025'],
+          datasets: [{
+            label: 'Student Data',
+            data: [10, 15, 20, 25],
+            backgroundColor: ['#0000cd', '#000080', '#0000cd', '#000080'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
